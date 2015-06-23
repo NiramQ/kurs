@@ -1,69 +1,38 @@
 <?php include "base.php"; ?>
 <!DOCTYPE HTML>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
-    <title>Регистрация пользователей на PHP</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Автовокзал</title>
+    <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-<div id="main">
 
+<header>
+    <div class="header-bg">
+    </div>
+</header>
+
+<ul id="menu">
+    <li><a href="index.php">Расписание автобусов</a></li>
+    <li class="current"><span>Покупка билетов</span></li>
+    <li><a href="#">Вакансии</a></li>
+    <li><a href="#">Контакты</a></li>
+    <li><a href="#">Обратная связь</a></li>
+</ul>
+
+<div id="content">
 </div>
+
+
+<footer>
+    <div class="footer-bg">
+        <div class="copyright">
+            <p><strong>Учебный сайт «Автовокзал»</strong></p>
+            <p>&copy; Маринкин Андрей Владимирович ИВТ11в</p>
+        </div>
+    </div>
+</footer>
+
 </body>
-<?php
-if (!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])) {
-    // даём доступ пользователю к главной странице
-} elseif (!empty($_POST['username']) && !empty($_POST['password'])) {
-    // позволим пользователю войти на сайт
-} else {
-    // выводим форму для авторизации
-}
-?>
-<div id="main">
-    <?php
-    if (!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])) {
-        // даём доступ пользователю к главной странице
-        ?>
-        <h1>Закрытый раздел!</h1>
-        <p>Привет, <b><?= $_SESSION['Username'] ?></p>
-        <p><a href="logout.php">Выход</a></p>
-    <?php
-    } elseif (!empty($_POST['username']) && !empty($_POST['password'])) {
-        // позволим пользователю войти на сайт
-        $username = mysql_real_escape_string($_POST['username']);
-        $password = md5(mysql_real_escape_string($_POST['password']));
-
-        $checklogin = mysql_query("SELECT * FROM users WHERE Username = '" . $username . "' AND Password = '" . $password . "'");
-
-        if (mysql_num_rows($checklogin) == 1) {
-            $row = mysql_fetch_array($checklogin);
-
-            $_SESSION['Username'] = $username;
-            $_SESSION['LoggedIn'] = 1;
-
-            echo "<h1>Успех!</h1>";
-            echo "<p>Сейчас вы будете перенаправлены в закрытый раздел.</p>";
-            echo "<meta http-equiv='refresh' content='2;index.php'>";
-        } else {
-            echo "<h1>Ошибка</h1>";
-            echo "<p>Прости, но мы не нашли такого аккаунта. Можешь <a href=\"index.php\">попробовать ещё раз</a>.</p>";
-        }
-    } else {
-        // выводим форму для авторизации
-        ?>
-        <h1>Авторизация</h1>
-
-        <p>Спасибо за то, что пришли! Войдите или <a href="register.php">зарегистрируйтесь</a>.</p>
-
-        <form method="post" action="index.php" name="loginform" id="loginform">
-            <fieldset>
-                <label for="username">Логин:</label><input type="text" name="username" id="username"><br>
-                <label for="password">Пароль:</label><input type="password" name="password" id="password"><br>
-                <input type="submit" name="login" id="login" value="Войти">
-            </fieldset>
-        </form>
-
-    <?php
-    } ?>
-</div>
+</html>
