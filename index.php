@@ -14,14 +14,20 @@
 </header>
 
 <ul id="menu">
-    <li><a href="index.php">Расписание автобусов</a></li>
-    <li class="current"><span>Покупка билетов</span></li>
-    <li><a href="#">Вакансии</a></li>
-    <li><a href="#">Контакты</a></li>
-    <li><a href="#">Обратная связь</a></li>
+    <li><a href="raspisanie/index.php">Расписание автобусов</a></li>
+    <li><a href="buy/index.php">Покупка билетов</a></li>
+    <li><a href="vakansy/index.php">Вакансии</a></li>
+    <li><a href="contact/index.php">Контакты</a></li>
+    <li><a href="feedback/index.php">Обратная связь</a></li>
 </ul>
 
 <div id="content">
+    <div style="text-align: center">
+        <h1> Hello World!</h1>
+        Данный сайт представляет собой курсовую работу по ТРС.</br>
+        Для полного ознакомления с работой необходима авторизация.</br>
+        (^_^)
+    </div>
 </div>
 
 
