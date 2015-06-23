@@ -26,7 +26,6 @@ if (!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])) {
         // позволим пользователю зарегистрироваться
         $username = mysql_real_escape_string($_POST['username']);
         $password = md5(mysql_real_escape_string($_POST['password']));
-        $email = mysql_real_escape_string($_POST['email']);
 
         $checkusername = mysql_query("SELECT * FROM users WHERE Username = '" . $username . "'");
 
@@ -34,7 +33,7 @@ if (!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])) {
             echo "<h1>Ошибка</h1>";
             echo "<p>Извините, такое имя пользователя уже используется. Вернитесь назад и попробуйте снова.</p>";
         } else {
-            $registerquery = mysql_query("INSERT INTO users (Username, Password, EmailAddress) VALUES('" . $username . "', '" . $password . "', '" . $email . "')");
+            $registerquery = mysql_query("INSERT INTO users (Username, Password) VALUES('" . $username . "', '" . $password . "')");
             if ($registerquery) {
                 echo "<h1>Успех!</h1>";
                 echo "<p>Ваша учётная запись создана. <a href=\"index.php\">Авторизуйтесь</a>.</p>";
@@ -54,7 +53,6 @@ if (!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])) {
             <fieldset>
                 <label for="username">Логин:</label><input type="text" name="username" id="username"><br>
                 <label for="password">Пароль:</label><input type="password" name="password" id="password"><br>
-                <label for="email">Email:</label><input type="text" name="email" id="email"><br>
                 <input type="submit" name="register" id="register" value="Зарегистрироваться">
             </fieldset>
         </form>

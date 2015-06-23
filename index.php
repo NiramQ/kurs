@@ -26,7 +26,7 @@ if (!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])) {
         // даём доступ пользователю к главной странице
         ?>
         <h1>Закрытый раздел!</h1>
-        <p>Привет, <b><?= $_SESSION['Username'] ?></b>. Твоя почта - <b><?= $_SESSION['EmailAddress'] ?></b>.</p>
+        <p>Привет, <b><?= $_SESSION['Username'] ?></p>
         <p><a href="logout.php">Выход</a></p>
     <?php
     } elseif (!empty($_POST['username']) && !empty($_POST['password'])) {
@@ -38,10 +38,8 @@ if (!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])) {
 
         if (mysql_num_rows($checklogin) == 1) {
             $row = mysql_fetch_array($checklogin);
-            $email = $row['EmailAddress'];
 
             $_SESSION['Username'] = $username;
-            $_SESSION['EmailAddress'] = $email;
             $_SESSION['LoggedIn'] = 1;
 
             echo "<h1>Успех!</h1>";
