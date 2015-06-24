@@ -43,7 +43,7 @@ footer {
     text-decoration: none; /* Убираем подчеркивание текста */
 }
 #content{
-    margin: 10px 50px 100px 225px; /* Значения отступов */
+    margin: 10px 10px 100px 225px; /* Значения отступов */
     padding: 5px; /* Поля вокруг текста */
     border: 1px solid #333; /* Параметры рамки */
 

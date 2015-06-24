@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
-    <title>Автовокзал</title>
+    <title>Расписание</title>
     <link href="../css/style.css" rel="stylesheet">
 </head>
 <body>
@@ -14,6 +14,10 @@
 </header>
 
 <ul id="menu">
+    <li><?php if (!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])){
+            echo "<a href='../reg/index.php'>Вы зашли как </a>";}
+        else {echo "<a href='../reg/index.php'>Войти</a>";}
+        ?></li>
     <li class="current"><span>Расписание автобусов</span></li>
     <li><a href="../buy/index.php">Покупка билетов</a></li>
     <li><a href="../vakansy/index.php">Вакансии</a></li>

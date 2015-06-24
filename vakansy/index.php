@@ -14,6 +14,10 @@
 </header>
 
 <ul id="menu">
+    <li><?php if (!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])){
+            echo "<a href='../reg/index.php'>Вы зашли как </a>";}
+        else {echo "<a href='../reg/index.php'>Войти</a>";}
+        ?></li>
     <li><a href="../raspisanie/index.php">Расписание автобусов</a></li>
     <li><a href="../buy/index.php">Покупка билетов</a></li>
     <li class="current"><span>Вакансии</span></li>
