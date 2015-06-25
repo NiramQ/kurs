@@ -50,17 +50,36 @@
         <input type="submit" name="changebus" value="изменить">
 
         <?php
-        if (($_POST['addbus']) && !empty($_POST['direction']) && !empty( $_POST['city']) && !empty($_POST['hours']) && !empty($_POST['minutes']) && !empty($_POST['numberbus'])){
-        $add = mysql_query("INSERT INTO bus (Direction, City, Hours, Minutes, Numway) VALUES('" . $_POST['direction']  . "', '" . $_POST['city'] . "', '" . $_POST['hours'] . "', '" . $_POST['minutes'] . "', '" . $_POST['numberbus'] . "')");
-        echo "</br>запись добавлена!";}
+        if (($_POST['addbus']) && !empty($_POST['direction']) && !empty($_POST['city']) && !empty($_POST['hours']) && !empty($_POST['minutes']) && !empty($_POST['numberbus'])) {
+            $add = mysql_query("INSERT INTO bus (Direction, City, Hours, Minutes, Numway) VALUES('" . $_POST['direction'] . "', '" . $_POST['city'] . "', '" . $_POST['hours'] . "', '" . $_POST['minutes'] . "', '" . $_POST['numberbus'] . "')");
+            echo "</br>запись добавлена!";
+        }
         ?>
         <?php
         if ($_POST['searchbus']) {
             mysql_query("Select * From bus Where (Direction = " . $_POST['direction'] . ")and(City =" . $_POST['city'] . ")and(Hours =" . $_POST['hours'] . ")and(Minutes = " . $_POST['minutes'] . ")and(Numway = " . $_POST['numberbus'] . ")");
             echo "</br>найдено!";
-        }?>
+        } ?>
 
     </form>
+
+    <form method="post" action="index.php" name="getways" id="getways">
+        <?php
+
+        $result =  mysql_query("Select * From bus");
+        if (!$result) {
+            echo 'Ошибка при выполнении запроса: ' . mysql_error();
+            exit;
+        }
+        if (mysql_num_rows($result) > 0) {
+            while ($row = mysql_fetch_assoc($result)) {
+                echo $row["City"];
+                echo $row["Hours"];
+                echo $row["Minutes"];            }
+        }
+        ?>
+    </form>
+
 
 </div>
 
@@ -68,6 +87,7 @@
     <div class="footer-bg">
         <div class="copyright">
             <p><strong>Учебный сайт «Автовокзал»</strong></p>
+
             <p>&copy; Маринкин Андрей Владимирович ИВТ11в</p>
         </div>
     </div>
