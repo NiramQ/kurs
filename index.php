@@ -14,6 +14,12 @@
 </header>
 
 <ul id="menu">
+    <li><?php if (!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])) {
+            echo "<a href='reg/index.php'>Вы зашли как, " . ($_SESSION['Username']) . "</a>";
+        } else {
+            echo "<a href='reg/index.php'>Войти</a>";
+        }
+        ?></li>
     <li><a href="raspisanie/index.php">Расписание автобусов</a></li>
     <li><a href="buy/index.php">Покупка билетов</a></li>
     <li><a href="vakansy/index.php">Вакансии</a></li>
@@ -25,7 +31,6 @@
     <div style="text-align: center">
         <h1> Hello World!</h1>
         Данный сайт представляет собой курсовую работу по ТРС.</br>
-        Для полного ознакомления с работой необходима авторизация.</br>
         (^_^)
     </div>
 </div>

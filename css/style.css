@@ -1,33 +1,40 @@
 
 .header-bg {
-     background: url(../img/testlogo.png) repeat-x center bottom;
-     height: 330px; /* Высота шапки */
-     text-align: center; /* Выравнивание по центру */
- }
+    background: url(../img/testlogo.png) repeat-x center bottom;
+    height: 330px; /* Высота шапки */
+    text-align: center; /* Выравнивание по центру */
+}
+
 .header-bg img {
     position: relative; /* Относительное позиционирование */
     top: 40px; /* Сдвигаем картинку вниз */
 }
+
 footer {
     position: fixed; /* Фиксированное положение */
-    left: 0; bottom: 0; /* Левый нижний угол */
+    left: 0;
+    bottom: 0; /* Левый нижний угол */
     padding: 10px; /* Поля вокруг текста */
     color: #fff; /* Цвет текста */
     width: 100%; /* Ширина слоя */
 }
+
 .footer-bg {
     background: #ffffff; /* Цвет фона подвала */
-    margin-top: 80px; /* Сдвигаем вниз */
+
 }
+
 .copyright {
     width: 740px; /* Ширина макета без полей */
     padding: 0 10px 10px; /* Поля */
     margin: auto; /* Выравнивание по центру */
     color: #000000; /* Цвет текста */
 }
+
 .copyright p {
     margin: 0 0 5px 170px; /* Отступы текста */
 }
+
 #menu {
     float: left; /* Обтекание справа */
     border: 1px solid #333; /* Параметры рамки вокруг */
@@ -35,16 +42,24 @@ footer {
     padding: 5px; /* Поля вокруг текста */
     margin: 10px 10px 20px 5px; /* Значения отступов */
 }
-#menu li,a {
+
+#menu li, a {
     display: block; /* Отображать ссылку как блок */
     padding: 2px; /* Поля вокруг ссылок */
     margin: 1px; /* Отступы вокруг */
     font-size: 0.9em; /* Размер текста */
     text-decoration: none; /* Убираем подчеркивание текста */
 }
-#content{
-    margin: 10px 50px 100px 225px; /* Значения отступов */
+
+#content {
+    margin: 10px 10px 100px 225px; /* Значения отступов */
     padding: 5px; /* Поля вокруг текста */
     border: 1px solid #333; /* Параметры рамки */
+}
 
+#twobuttons {
+    text-align: center;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
 }

@@ -14,11 +14,18 @@
 </header>
 
 <ul id="menu">
+    <li><?php if (!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])) {
+            echo "<a href='../reg/index.php'>Вы зашли как, " . ($_SESSION['Username']) . "</a>";
+        } else {
+            echo "<a href='../reg/index.php'>Войти</a>";
+        }
+        ?></li>
     <li><a href="../raspisanie/index.php">Расписание автобусов</a></li>
     <li><a href="../buy/index.php">Покупка билетов</a></li>
     <li><a href="../vakansy/index.php">Вакансии</a></li>
     <li><a href="../contact/index.php">Контакты</a></li>
     <li class="current"><span>Обратная связь</span></li>
+    <?php if (!empty($_SESSION['LoggedIn'])) echo "<li><a href='../reg/logout.php'>Выйти</a></li>"; ?>
 </ul>
 
 <div id="content">
@@ -29,6 +36,7 @@
     <div class="footer-bg">
         <div class="copyright">
             <p><strong>Учебный сайт «Автовокзал»</strong></p>
+
             <p>&copy; Маринкин Андрей Владимирович ИВТ11в</p>
         </div>
     </div>
