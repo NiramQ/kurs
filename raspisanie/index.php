@@ -29,32 +29,39 @@
 </ul>
 
 <div id="content">
+    <?php if (!empty($_SESSION['LoggedIn']) && ($_SESSION['Username']) == "admin") {
+        ?>
+        <div id="twobuttons">
+            <input type="button" name="prosmotr" value="просмотр" onclick="hideshow1();window.location.reload()"">
+            <input type="button" name="change" value="изменить" onclick="hideshow2()">
+        </div>
+    <?php } ?>
+    <form method="post" action="index.php" name="buswaychange" id="buswaychange"><!--добавить потом hidden="true"-->
+        <div>
+            <label> откуда: </label><input type="text" name="from" id="from">
+            <label> куда: </label><input type="text" name="where" id="where"></br >
+            <label> выберите маршрут: </label><select>
+                <option> 10</option>
+                <option> 20</option>
+            </select>
+            <label> или добавьте новый:</label> <input type="text" name="numbus" id="numbus"></br >
+        </div>
+        <div>
+        <label> отправление: </label><select>
+            <option> 10</option>
+            <option> 20</option>
+        </select>
+        <label>или добавьте новое:</label><input type="text" name="goway" id="goway"></br >
+        <input type="submit" name="savebus" value="Сохранить">
+        </div>
+    </form>
 
-    <div id="twobuttons">
-        <input type="button" name="prosmotr" value="просмотр">
-        <input type="button" name="change" value="изменить">
-    </div>
+    <form method="post" action="index.php" name="busway" id="busway">
 
-    <div id="change">
-        <form method="post" action="index.php" name="busway" id="busway">
-            <label>откуда: </label><input type="text" name="from" id="from">
-            <label>куда: </label><input type="text" name="where" id="where"></br>
-            <label>выберите маршрут: </label><select>
-                <option>10</option>
-                <option>20</option>
-            </select></br>
-            <label>или добавьте новый: </label> <input type="text" name="numbus" id="numbus"></br>
-            <label>отправление: </label></br><textarea id="raspisanie"></textarea></br>
-            <input type="submit" name="savebus" value="Сохранить">
-        </form>
-    </div>
+    </form>
 
-    <div>
-
-    </div>
 
 </div>
-
 
 <footer>
     <div class="footer-bg">
@@ -68,3 +75,14 @@
 
 </body>
 </html>
+
+<script>
+    function hideshow1() {
+        document.getElementById("busway").hidden = false;
+        document.getElementById("buswaychange").hidden = true;
+    }
+    function hideshow2() {
+        document.getElementById("busway").hidden = true;
+        document.getElementById("buswaychange").hidden = false;
+    }
+</script>
