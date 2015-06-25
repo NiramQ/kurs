@@ -63,3 +63,17 @@ footer {
     padding-bottom: 10px;
     margin-bottom: 10px;
 }
+#numberbus {
+    width: 30px;
+    margin: 2px;
+}
+#hours {
+    width: 20px;
+    text-align: center;
+    margin: 2px;
+}
+#minutes {
+    width: 20px;
+    text-align: center;
+    margin: 2px;
+}

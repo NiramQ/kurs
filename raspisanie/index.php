@@ -33,33 +33,34 @@
         ?>
         <div id="twobuttons">
             <input type="button" name="prosmotr" value="просмотр" onclick="hideshow1();window.location.reload()"">
-            <input type="button" name="change" value="изменить" onclick="hideshow2()">
+            <input type="button" name="change" value="добавить" onclick="hideshow2()">
         </div>
     <?php } ?>
+
     <form method="post" action="index.php" name="buswaychange" id="buswaychange"><!--добавить потом hidden="true"-->
-        <div>
-            <label> откуда: </label><input type="text" name="from" id="from">
-            <label> куда: </label><input type="text" name="where" id="where"></br >
-            <label> выберите маршрут: </label><select>
-                <option> 10</option>
-                <option> 20</option>
-            </select>
-            <label> или добавьте новый:</label> <input type="text" name="numbus" id="numbus"></br >
-        </div>
-        <div>
-        <label> отправление: </label><select>
-            <option> 10</option>
-            <option> 20</option>
-        </select>
-        <label>или добавьте новое:</label><input type="text" name="goway" id="goway"></br >
-        <input type="submit" name="savebus" value="Сохранить">
-        </div>
+        <label> куда: </label><input type="text" name="city" id="city">
+        <input type="radio" name="direction" value="1" checked>Прямой рейс
+        <input type="radio" name="direction" value="0">Обратный рейс </br>
+        <label>рейс № </label><input type="text" name="numberbus" id="numberbus"></br>
+        <label>время:</label><input type="text" name="hours" id="hours"><label>ч.</label><input type="text"
+                                                                                                name="minutes"
+                                                                                                id="minutes"><label>м.</label></br>
+        <input type="submit" name="addbus" value="добавить">
+        <input type="submit" name="searchbus" value="найти">
+        <input type="submit" name="changebus" value="изменить">
+
+        <?php
+        if (($_POST['addbus']) && !empty($_POST['direction']) && !empty( $_POST['city']) && !empty($_POST['hours']) && !empty($_POST['minutes']) && !empty($_POST['numberbus'])){
+        $add = mysql_query("INSERT INTO bus (Direction, City, Hours, Minutes, Numway) VALUES('" . $_POST['direction']  . "', '" . $_POST['city'] . "', '" . $_POST['hours'] . "', '" . $_POST['minutes'] . "', '" . $_POST['numberbus'] . "')");
+        echo "</br>запись добавлена!";}
+        ?>
+        <?php
+        if ($_POST['searchbus']) {
+            mysql_query("Select * From bus Where (Direction = " . $_POST['direction'] . ")and(City =" . $_POST['city'] . ")and(Hours =" . $_POST['hours'] . ")and(Minutes = " . $_POST['minutes'] . ")and(Numway = " . $_POST['numberbus'] . ")");
+            echo "</br>найдено!";
+        }?>
+
     </form>
-
-    <form method="post" action="index.php" name="busway" id="busway">
-
-    </form>
-
 
 </div>
 
@@ -67,7 +68,6 @@
     <div class="footer-bg">
         <div class="copyright">
             <p><strong>Учебный сайт «Автовокзал»</strong></p>
-
             <p>&copy; Маринкин Андрей Владимирович ИВТ11в</p>
         </div>
     </div>
