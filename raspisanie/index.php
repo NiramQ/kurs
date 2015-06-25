@@ -29,6 +29,30 @@
 </ul>
 
 <div id="content">
+
+    <div id="twobuttons">
+        <input type="button" name="prosmotr" value="просмотр">
+        <input type="button" name="change" value="изменить">
+    </div>
+
+    <div id="change">
+        <form method="post" action="index.php" name="busway" id="busway">
+            <label>откуда: </label><input type="text" name="from" id="from">
+            <label>куда: </label><input type="text" name="where" id="where"></br>
+            <label>выберите маршрут: </label><select>
+                <option>10</option>
+                <option>20</option>
+            </select></br>
+            <label>или добавьте новый: </label> <input type="text" name="numbus" id="numbus"></br>
+            <label>отправление: </label></br><textarea id="raspisanie"></textarea></br>
+            <input type="submit" name="savebus" value="Сохранить">
+        </form>
+    </div>
+
+    <div>
+
+    </div>
+
 </div>
 
 
