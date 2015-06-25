@@ -15,9 +15,9 @@
 
 <ul id="menu">
     <li><?php if (!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])) {
-            echo "<a href='index.php'>Вы зашли как </a>";
+            echo "<a href='../reg/index.php'>Вы зашли как, " . ($_SESSION['Username']) . "</a>";
         } else {
-            echo "<a href='index.php'>Войти</a>";
+            echo "<a href='../reg/index.php'>Войти</a>";
         }
         ?></li>
     <li><a href="../raspisanie/index.php">Расписание автобусов</a></li>
@@ -25,6 +25,8 @@
     <li><a href="../vakansy/index.php">Вакансии</a></li>
     <li><a href="../contact/index.php">Контакты</a></li>
     <li><a href="../feedback/index.php">Обратная связь</a></li>
+    <?php if (!empty($_SESSION['LoggedIn'])) echo "<li><a href='logout.php'>Выйти</a></li>"; ?>
+
 </ul>
 
 <div id="content">
@@ -47,7 +49,6 @@
                     $_SESSION['LoggedIn'] = 1;
 
                     echo "<h1>Успех!</h1>";
-                    echo "<p>Сейчас вы будете перенаправлены в закрытый раздел.</p>";
                     echo "<meta http-equiv='refresh' content='2;index.php'>";
                 } else {
                     echo "<h1>Ошибка</h1>";
@@ -61,8 +62,8 @@
 
                 <form method="post" action="index.php" name="loginform" id="loginform">
                     <fieldset>
-                        <label for="username">Логин:</label><input type="text" name="username" id="username"><br>
-                        <label for="password">Пароль:</label><input type="password" name="password" id="password"><br>
+                        <label for="username"> Логин:</label><input type="text" name="username" id="username"></br>
+                        <label for="password">Пароль:</label><input type="password" name="password" id="password"></br>
                         <input type="submit" name="login" id="login" value="Войти">
                     </fieldset>
                 </form>
