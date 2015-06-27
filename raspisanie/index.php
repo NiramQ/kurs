@@ -30,13 +30,7 @@
 
 <div id="content">
     <?php if (!empty($_SESSION['LoggedIn']) && ($_SESSION['Username']) == "admin") {
-        ?>
-        <div id="twobuttons">
-            <input type="button" name="prosmotr" value="просмотр" onclick="hideshow1();window.location.reload()"">
-            <input type="button" name="change" value="добавить" onclick="hideshow2()">
-        </div>
-    <?php } ?>
-
+    ?>
     <form method="post" action="index.php" name="buswaychange" id="buswaychange"><!--добавить потом hidden="true"-->
         <label> куда: </label><input type="text" name="city" id="city">
         <input type="radio" name="direction" value="1" checked>Прямой рейс
@@ -45,42 +39,59 @@
         <label>время:</label><input type="text" name="hours" id="hours"><label>ч.</label><input type="text"
                                                                                                 name="minutes"
                                                                                                 id="minutes"><label>м.</label></br>
+        <label>стоимость:</label><input type="text" name="money" id="money"><label> рублей</label></br>
         <input type="submit" name="addbus" value="добавить">
-        <input type="submit" name="searchbus" value="найти">
-        <input type="submit" name="changebus" value="изменить">
+        <input type="submit" name="delbus" value="удалить">
 
         <?php
         if (($_POST['addbus']) && !empty($_POST['direction']) && !empty($_POST['city']) && !empty($_POST['hours']) && !empty($_POST['minutes']) && !empty($_POST['numberbus'])) {
             $add = mysql_query("INSERT INTO bus (Direction, City, Hours, Minutes, Numway) VALUES('" . $_POST['direction'] . "', '" . $_POST['city'] . "', '" . $_POST['hours'] . "', '" . $_POST['minutes'] . "', '" . $_POST['numberbus'] . "')");
             echo "</br>запись добавлена!";
         }
-        ?>
-        <?php
-        if ($_POST['searchbus']) {
-            mysql_query("Select * From bus Where (Direction = " . $_POST['direction'] . ")and(City =" . $_POST['city'] . ")and(Hours =" . $_POST['hours'] . ")and(Minutes = " . $_POST['minutes'] . ")and(Numway = " . $_POST['numberbus'] . ")");
-            echo "</br>найдено!";
-        } ?>
+        if (isset($_POST['delbus']) && !empty($_POST['direction']) && !empty($_POST['city']) && !empty($_POST['hours']) && !empty($_POST['minutes']) && !empty($_POST['numberbus'])) {
 
+        echo "</br>запись удалена!";}
+        $delbus = mysql_query("Delete From bus Where Direction Like'" . $_POST['direction'] . "'and City Like '" . $_POST['city'] . "'and Hours Like '" . $_POST['hours'] . "'and Minutes Like '" . $_POST['minutes'] . "'and Numway Like '" . $_POST['numberbus'] . "'");
+
+            ?>
     </form>
+<?php } ?>
 
+    </br>
     <form method="post" action="index.php" name="getways" id="getways">
-        <?php
+        <input type="submit" name="searchbus" value="поиск"></br>
 
-        $result =  mysql_query("Select * From bus");
+        <?php
+        $cityresult = mysql_query("SELECT DISTINCT City FROM bus");
+        if (!$cityresult) {
+            echo 'Ошибка при выполнении запроса: ' . mysql_error();
+            exit;
+        }
+        if (mysql_num_rows($cityresult) > 0) {
+
+            ?> <select name="selectcity" id="selectcity"><option></option><?php
+            while ($row = mysql_fetch_assoc($cityresult)) {
+                ?>
+                <option><?php echo $row["City"]; ?> </option><?php
+            }
+            ?></select></br><?php
+        }
+
+
+        //        $result = mysql_query("Select * From bus Where City Like '" . $_POST['selectcity'] . "' Order by Hours, Order by Minutes");
+        $result = mysql_query("Select * From bus Where City Like '" . $_POST['selectcity'] . "' Order By Hours, Minutes");
         if (!$result) {
             echo 'Ошибка при выполнении запроса: ' . mysql_error();
             exit;
         }
         if (mysql_num_rows($result) > 0) {
+            echo $_POST['selectcity'] . ' ';
             while ($row = mysql_fetch_assoc($result)) {
-                echo $row["City"];
-                echo $row["Hours"];
-                echo $row["Minutes"];            }
+                echo $row["Hours"] . ':' . $row["Minutes"] . ' ';
+            }
         }
         ?>
     </form>
-
-
 </div>
 
 <footer>
@@ -95,14 +106,3 @@
 
 </body>
 </html>
-
-<script>
-    function hideshow1() {
-        document.getElementById("busway").hidden = false;
-        document.getElementById("buswaychange").hidden = true;
-    }
-    function hideshow2() {
-        document.getElementById("busway").hidden = true;
-        document.getElementById("buswaychange").hidden = false;
-    }
-</script>
