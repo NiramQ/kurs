@@ -29,15 +29,39 @@
 </ul>
 
 <div id="content">
+    <form action="index.php" method="post">
+        <div name="buyticket" id="buyticket">
+        <label>укажите дату: </label><input type="date" name="buydate"></br>
+        <?php
+//        if (($_POST['buydate']) < date("Y-m-d", mktime(0, 0, 0, date("m"), date("d") + 7, date("Y")))) {
+//            echo "введите корректную дату";
+//        }
+        $cityresult = mysql_query("SELECT DISTINCT City FROM bus");
+        if (!$cityresult) {
+            echo 'Ошибка при выполнении запроса: ' . mysql_error();
+            exit;
+        }
+        if (mysql_num_rows($cityresult) > 0) {
+
+            ?><label>выберите город:</label> <select name="selectcity" id="selectcity"><option></option><?php
+            while ($row = mysql_fetch_assoc($cityresult)) {
+                ?>
+                <option><?php echo $row["City"]; ?> </option><?php
+            }
+            ?></select></br><?php
+        }
+        ?>
+        </div>
+    </form>
 </div>
 
 
 <footer>
     <div class="footer-bg">
         <div class="copyright">
-            <p><strong>Учебный сайт «Автовокзал»</strong></p>
+            <p><strong> Учебный сайт «Автовокзал» </strong></p>
 
-            <p>&copy; Маринкин Андрей Владимирович ИВТ11в</p>
+            <p>&copy; Маринкин Андрей Владимирович ИВТ11в </p>
         </div>
     </div>
 </footer>

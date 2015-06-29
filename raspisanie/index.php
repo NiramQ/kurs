@@ -36,9 +36,9 @@
         <input type="radio" name="direction" value="1" checked>Прямой рейс
         <input type="radio" name="direction" value="0">Обратный рейс </br>
         <label>рейс № </label><input type="text" name="numberbus" id="numberbus"></br>
-        <label>время:</label><input type="text" name="hours" id="hours"><label>ч.</label><input type="text"
+        <label>время:</label><input type="text" name="hours" id="hours" min="0" max="23"><label>ч.</label><input type="text"
                                                                                                 name="minutes"
-                                                                                                id="minutes"><label>м.</label></br>
+                                                                                                id="minutes" min="1" max="59"><label>м.</label></br>
         <label>стоимость:</label><input type="text" name="money" id="money"><label> рублей</label></br>
         <input type="submit" name="addbus" value="добавить">
         <input type="submit" name="delbus" value="удалить">
