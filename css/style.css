@@ -63,3 +63,50 @@ footer {
     padding-bottom: 10px;
     margin-bottom: 10px;
 }
+#numberbus {
+    width: 30px;
+    margin: 2px;
+}
+#hours {
+    width: 20px;
+    text-align: center;
+    margin: 2px;
+}
+#minutes {
+    width: 20px;
+    text-align: center;
+    margin: 2px;
+}
+#money {
+    width: 30px;
+    text-align: center;
+    margin: 2px;
+}
+#selectcity {
+    margin: 3px;
+}
+#buyticket{
+    border: 3px double;
+    margin: 2px;
+}
+label {
+    margin: 2px;
+}
+input{
+    margin: 2px;
+}
+select {
+    margin: 2px;
+}
+#counttickets {
+    width: 40px;
+}
+#cena {
+    width: 33px;
+}
+#sdbus {
+    border: 2px solid ;
+}
+#bbtick {
+    text-align: center;
+}

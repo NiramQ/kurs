@@ -21,7 +21,7 @@
         }
         ?></li>
     <li class="current"><span>Расписание автобусов</span></li>
-    <li><a href="../buy/index.php">Покупка билетов</a></li>
+    <?php if (!empty($_SESSION['LoggedIn'])) echo "<li><a href='../buy/index.php'>Покупка билетов</a></li>";?>
     <li><a href="../vakansy/index.php">Вакансии</a></li>
     <li><a href="../contact/index.php">Контакты</a></li>
     <li><a href="../feedback/index.php">Обратная связь</a></li>
@@ -29,32 +29,75 @@
 </ul>
 
 <div id="content">
+    <?php if (!empty($_SESSION['LoggedIn']) && ($_SESSION['Username']) == "admin") {
+        ?>
+        <form method="post" action="index.php" name="buswaychange" id="buswaychange"><!--добавить потом hidden="true"-->
+          <div id="sdbus">
+            <label> куда: </label><input type="text" name="city" id="city">
+            <input type="radio" name="direction" value="1" checked>Прямой рейс
+            <input type="radio" name="direction" value="0">Обратный рейс </br>
+            <label>рейс № </label><input type="text" name="numberbus" id="numberbus"></br>
+            <label>время:</label><input type="time" name="timebus">
+            </br>
+<!--            <label>время:</label><input type="text" name="hours" id="hours" min="0" max="23"><label>ч.</label><input-->
+<!--                type="text"-->
+<!--                name="minutes"-->
+<!--                id="minutes" min="1" max="59"><label>м.</label></br>-->
+            <label>стоимость:</label><input type="text" name="money" id="money"><label> рублей</label></br>
+            <input type="submit" name="addbus" value="добавить">
+            <input type="submit" name="delbus" value="удалить">
 
-    <div id="twobuttons">
-        <input type="button" name="prosmotr" value="просмотр">
-        <input type="button" name="change" value="изменить">
-    </div>
+            <?php
+            if (($_POST['addbus']) && !empty($_POST['direction']) && !empty($_POST['city']) && !empty($_POST['timebus']) && !empty($_POST['numberbus'])) {
+                $add = mysql_query("INSERT INTO bus (Direction, City, Time, Numway, Money) VALUES('" . $_POST['direction'] . "', '" . $_POST['city'] . "', '" . $_POST['timebus'] . "', '" . $_POST['numberbus'] . "', '" . $_POST['money'] . "')");
+                echo "</br>запись добавлена!";
+            }
+            if (isset($_POST['delbus']) && !empty($_POST['direction']) && !empty($_POST['city']) && !empty($_POST['timebus']) && !empty($_POST['numberbus'])) {
 
-    <div id="change">
-        <form method="post" action="index.php" name="busway" id="busway">
-            <label>откуда: </label><input type="text" name="from" id="from">
-            <label>куда: </label><input type="text" name="where" id="where"></br>
-            <label>выберите маршрут: </label><select>
-                <option>10</option>
-                <option>20</option>
-            </select></br>
-            <label>или добавьте новый: </label> <input type="text" name="numbus" id="numbus"></br>
-            <label>отправление: </label></br><textarea id="raspisanie"></textarea></br>
-            <input type="submit" name="savebus" value="Сохранить">
+                echo "</br>запись удалена!";
+            }
+            $delbus = mysql_query("Delete From bus Where Direction Like'" . $_POST['direction'] . "'and City Like '" . $_POST['city'] . "'and Time Like '" . $_POST['timebus'] . "'and Numway Like '" . $_POST['numberbus'] . "'");
+            ?>
+          </div>
         </form>
-    </div>
+    <?php } ?>
 
-    <div>
+    </br>
+    <form method="post" action="index.php" name="getways" id="getways">
+        <input type="submit" name="searchbus" value="поиск"></br>
 
-    </div>
+        <?php
+        $cityresult = mysql_query("SELECT DISTINCT City FROM bus");
+        if (!$cityresult) {
+            echo 'Ошибка при выполнении запроса: ' . mysql_error();
+            exit;
+        }
+        if (mysql_num_rows($cityresult) > 0) {
 
+            ?> <select name="selectcity" id="selectcity"><option></option><?php
+            while ($row = mysql_fetch_assoc($cityresult)) {
+                ?>
+                <option><?php echo $row["City"]; ?> </option><?php
+            }
+            ?></select></br><?php
+        }
+
+
+        //        $result = mysql_query("Select * From bus Where City Like '" . $_POST['selectcity'] . "' Order by Hours, Order by Minutes");
+        $result = mysql_query("Select * From bus Where City Like '" . $_POST['selectcity'] . "' Order By Time");
+        if (!$result) {
+            echo 'Ошибка при выполнении запроса: ' . mysql_error();
+            exit;
+        }
+        if (mysql_num_rows($result) > 0) {
+            echo $_POST['selectcity'] . ' ';
+            while ($row = mysql_fetch_assoc($result)) {
+                ?> <label ><?php $date = new DateTime($row["Time"]); echo date_format($date, 'H:i'); ?></label> <?php
+            }
+        }
+        ?>
+    </form>
 </div>
-
 
 <footer>
     <div class="footer-bg">

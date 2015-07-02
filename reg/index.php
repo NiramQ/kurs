@@ -21,7 +21,7 @@
         }
         ?></li>
     <li><a href="../raspisanie/index.php">Расписание автобусов</a></li>
-    <li><a href="../buy/index.php">Покупка билетов</a></li>
+    <?php if (!empty($_SESSION['LoggedIn'])) echo "<li><a href='../buy/index.php'>Покупка билетов</a></li>";?>
     <li><a href="../vakansy/index.php">Вакансии</a></li>
     <li><a href="../contact/index.php">Контакты</a></li>
     <li><a href="../feedback/index.php">Обратная связь</a></li>
