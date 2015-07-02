@@ -98,3 +98,15 @@ input{
 select {
     margin: 2px;
 }
+#counttickets {
+    width: 40px;
+}
+#cena {
+    width: 33px;
+}
+#sdbus {
+    border: 2px solid ;
+}
+#bbtick {
+    text-align: center;
+}
