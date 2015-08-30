@@ -14,17 +14,18 @@
 </header>
 
 <ul id="menu">
-    <li><?php if (!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])) {
-            echo "<a href='../reg/index.php'>Вы зашли как </a>";
-        } else {
-            echo "<a href='../reg/index.php'>Войти</a>";
-        }
-        ?></li>
-    <li><a href="../raspisanie/index.php">Расписание автобусов</a></li>
-    <li><a href="../buy/index.php">Покупка билетов</a></li>
-    <li><a href="../vakansy/index.php">Вакансии</a></li>
-    <li><a href="../contact/index.php">Контакты</a></li>
-    <li><a href="../feedback/index.php">Обратная связь</a></li>
+        <li><?php if (!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])) {
+                echo "<a href='../reg/index.php'>Вы зашли как, " . ($_SESSION['Username']) . "</a>";
+            } else {
+                echo "<a href='../reg/index.php'>Войти</a>";
+            }
+            ?></li>
+        <li><a href="../raspisanie/index.php">Расписание автобусов</a></li>
+        <?php if (!empty($_SESSION['LoggedIn'])) echo "<li><a href='../buy/index.php'>Покупка билетов</a></li>";?>
+        <li><a href="../vakansy/index.php">Вакансии</a></li>
+        <li><a href="../contact/index.php">Контакты</a></li>
+        <li><a href="../feedback/index.php">Обратная связь</a></li>
+        <?php if (!empty($_SESSION['LoggedIn'])) echo "<li><a href='../reg/logout.php'>Выйти</a></li>"; ?>
 </ul>
 <div id="content">
     <div style="text-align: center">

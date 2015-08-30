@@ -58,7 +58,7 @@
                 // выводим форму для авторизации
                 ?>
 
-                <p>Спасибо за то, что пришли! Войдите или <a href="register.php">зарегистрируйтесь</a>.</p>
+                <p>Спасибо за то, что пришли! Войдите или <a href="register.php">зарегистрируйтесь</a></p>
 
                 <form method="post" action="index.php" name="loginform" id="loginform">
                     <fieldset>
